@@ -18,11 +18,11 @@ def main(task_files, out_examples):
                 oid,val=l[6:].split(','); val=int(val[:-2]); color[oid]=val
         for oid,h in holes.items():
             if h>0:
-                pos.append(f'transform({oid},4).')
+                pos.append(f'transform({oid},4)')
                 if color[oid]!=4:
-                    neg.append(f'transform({oid},{color[oid]}).')
+                    neg.append(f'transform({oid},{color[oid]})')
             else:
-                neg.append(f'transform({oid},4).')
+                neg.append(f'transform({oid},4)')
     with open(out_examples,'w') as f:
         for p in pos:
             f.write('pos(' + p + ').\n')
