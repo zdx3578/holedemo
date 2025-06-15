@@ -1,15 +1,12 @@
 %%%%%%%%%%%%  Predicate catalogue  %%%%%%%%%%%%
 
 % head predicate
-head_pred(transform,2).            % transform(+Obj,#Color)
+head_pred(transform,2).
 
-% —— BK 谓词 ——
-body_pred(color,2).                % color(+Obj,#Color)
-body_pred(holes,2).                % holes(+Obj,#Int)
-body_pred(has_hole,1).             % has_hole(+Obj)
-body_pred(object,1).               % object(+Obj)
-
-%%%%%%%%%%%%  Type system  %%%%%%%%%%%%
+body_pred(color,2).
+body_pred(holes,2).
+body_pred(has_hole,1).
+body_pred(object,1).
 
 type(obj).
 type(color).
@@ -21,11 +18,24 @@ type(holes,    (obj,int)).
 type(has_hole, (obj,)).
 type(object,   (obj,)).
 
-%%%%%%%%%%%%  Constants  %%%%%%%%%%%%
+constant(color,4).
 
-constant(color,4).                 % 黄色常量，Popper 才能绑定 4
+direction(transform/2,(in,out)).
+direction(color/2,(in,out)).
+direction(holes/2,(in,out)).
+direction(has_hole/1,(in)).
+direction(object/1,(in)).
 
-%%%%%%%%%%%%  Search limits  %%%%%%%%%%%%
+
+body_pred(my_geq,2).      type(my_geq,(int,int)).
+body_pred(my_leq,2).      type(my_leq,(int,int)).
+body_pred(my_gt,2).       type(my_gt,(int,int)).
+body_pred(my_lt,2).       type(my_lt,(int,int)).
+body_pred(my_add,3).      type(my_add,(int,int,int)).
+body_pred(my_mult,3).     type(my_mult,(int,int,int)).
+body_pred(my_subtract,3). type(my_subtract,(int,int,int)).
+
+constant(int,0).          % 至少要有一个 int 常量
 
 max_body(2).
 max_vars(3).
