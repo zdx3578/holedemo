@@ -18,11 +18,11 @@ type(transform,(obj,color)).
 type(color,    (obj,color)).
 type(holes,    (obj,int)).
 type(has_hole, (obj,)).
-type(target_color,(color)).      % <— 类型只有一个 color
+type(target_color,(color,)).      % <— 类型只有一个 color
 
-constant(color,4).
+constant(4,color).
 
 %%%%%%%%%%%%  限制  %%%%%%%%%%%%
 
 max_body(2).   max_vars(3).   max_clauses(1).
-
+non_datalog.

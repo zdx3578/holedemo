@@ -22,14 +22,14 @@ type(transform,(obj,color)).
 type(color,    (obj,color)).
 type(holes,    (obj,int)).
 type(has_hole, (obj,)).
-type(target_color,(color)).      % <— 类型只有一个 color
+type(target_color,(color,)).      % <— 类型只有一个 color
 
-constant(color,4).
+constant(4,color).
 
 %%%%%%%%%%%%  限制  %%%%%%%%%%%%
 
 max_body(2).   max_vars(3).   max_clauses(1).
-
+non_datalog.
 EOF
 
 cat > popper/recall.pl <<'EOF'
@@ -48,7 +48,9 @@ echo "target_color(4)." >> popper/bk.pl
 echo "[3] Emit examples"
 python3 scripts/04_emit_examples.py train/*.json popper/exs.pl
 echo "[4] Run popper"
-(python3 Poppermain/popper.py --debug ./popper/ )
+(python3 Poppermain/popper.py --debug ./popper/  | tee popper/popper_stdout.log    )
+echo "[4] Run popper -- grep solution"
+# (grep -A3 '^********* SOLUTION *********' popper/popper_stdout.log   | grep -E '^transform' > popper/program.pl)
 echo "[5] Apply rule to test"
 RULE=popper/program.pl
 if [ -f "$RULE" ]; then
